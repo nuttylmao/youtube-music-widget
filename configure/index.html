@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="#" />
+	<link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+	<div id="mainContainer">
+		<div id="connectBox">
+			Click here to connect:
+			<button onclick="RequestToken()">Connect</button>
+		</div>
+		<div id="authorizationBox">
+			<span id="authorizationCode"></span>
+			<br>
+			<button id="copyURLButton" onclick="CopyToURL()" disabled="true">Click here to copy URL</button>
+		</div>
+		<div id="errorBox">
+			Error Code: 
+			<span id="errorCode"></span>
+			<br>
+			Message: 
+			<span id="errorMessage"></span>
+		</div>
+	</div>
+</body>
+
+<script src="./script.js"></script>

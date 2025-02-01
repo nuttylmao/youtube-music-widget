@@ -1,0 +1,58 @@
+* {
+	--corner-radius: 10px;
+	--padding: 20px;
+}
+
+body {
+	margin: 0px;
+	color: white;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+	font-size: 20px;
+}
+
+#mainContainer {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	margin: 0px;
+	background-color: #282828;
+}
+
+#errorBox {
+	background-color: #181818;
+	border-style: solid;
+	border-color: white;
+	border-width: 1px;
+	border-radius: var(--corner-radius);
+	padding: var(--padding);
+	/* position: absolute;
+	left: 50%;
+	top: 50%;	
+	transform: translateX(-50%) translateY(-50%); */
+}
+
+#connectBox{
+	background-color: #181818;
+	border-style: solid;
+	border-color: white;
+	border-width: 1px;
+	border-radius: var(--corner-radius);
+	padding: var(--padding);
+	/* position: absolute;
+	left: 50%;
+	top: 50%;	
+	transform: translateX(-50%) translateY(-50%); */
+}
+
+#authorizationBox {
+	background-color: #181818;
+	border-style: solid;
+	border-color: white;
+	border-width: 1px;
+	border-radius: var(--corner-radius);
+	padding: var(--padding);
+	/* position: absolute;
+	left: 50%;
+	top: 50%;	
+	transform: translateX(-50%) translateY(-50%); */
+}
