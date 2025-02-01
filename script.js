@@ -29,8 +29,8 @@ function connectws() {
 		auth: {
 			token: token
 		}
-	}); 
-	
+	});
+
 	socket.on("state-update", (state) => {
 		console.debug(state);
 		UpdatePlayer(state);
@@ -43,12 +43,12 @@ function connectws() {
 	socket.on("playlist-delete", (playlistId) => {
 		console.debug(playlistId);
 	});
-	
-	socket.on('connect', function(){
+
+	socket.on('connect', function () {
 		SetConnectionStatus(true);
 	});
 
-	socket.on('disconnect', function(){
+	socket.on('disconnect', function () {
 		SetConnectionStatus(false);
 		setTimeout(connectws, 5000);
 	});
@@ -56,54 +56,58 @@ function connectws() {
 
 function UpdatePlayer(state) {
 
-	if (state.player.trackState != currentState)
-	{
+	if (state.player.trackState != currentState) {
 		// Set thumbnail
 		const songInfo = state.video;
 		const thumbnail = songInfo.thumbnails[songInfo.thumbnails.length - 1].url;
-		console.log(thumbnail);
+		console.debug(thumbnail);
 		UpdateAlbumArt(document.getElementById("albumArt"), thumbnail);
 		UpdateAlbumArt(document.getElementById("backgroundImage"), thumbnail);
-	
+
 		// Set song info
-		console.log(`Artist: ${songInfo.author}`);
-		console.log(`Title: ${songInfo.title}`);
+		console.debug(`Artist: ${songInfo.author}`);
+		console.debug(`Title: ${songInfo.title}`);
 		UpdateTextLabel(document.getElementById("artistLabel"), songInfo.author);
 		UpdateTextLabel(document.getElementById("songLabel"), songInfo.title);
 
 		// Set player visibility
-		switch (state.player.trackState)
-		{
+		switch (state.player.trackState) {
 			case -1:
-				console.log("Player State: Unknown");
+				console.debug("Player State: Unknown");
 				SetVisibility(false);
 				break;
 			case 0:
-				console.log("Player State: Paused");
+				console.debug("Player State: Paused");
 				SetVisibility(false);
 				break;
 			case 2:
-				console.log("Player State: Buffering");
+				console.debug("Player State: Buffering");
 				SetVisibility(false);
 				break;
 			case 1:
-				console.log("Player State: Playing");
+				console.debug("Player State: Playing");
 				setTimeout(() => {
 					SetVisibility(true);
 				}, animationSpeed * 1000);
 				break;
 		}
 
+		if (visibilityDuration > 0) {
+			setTimeout(() => {
+				SetVisibility(false);
+			}, visibilityDuration * 1000);
+		}
+
 		currentState = state.player.trackState;
-	}	
+	}
 
 	// Set progressbar	
 	const songInfo = state.video;
 	const progress = ((state.player.videoProgress / songInfo.durationSeconds) * 100);
 	const progressTime = ConvertSecondsToMinutesSoThatItLooksBetterOnTheOverlay(state.player.videoProgress);
-	const duration = ConvertSecondsToMinutesSoThatItLooksBetterOnTheOverlay(songInfo.durationSeconds);	
-	console.log(`Progress: ${ConvertSecondsToMinutesSoThatItLooksBetterOnTheOverlay(state.player.videoProgress)}`);
-	console.log(`Duration: ${ConvertSecondsToMinutesSoThatItLooksBetterOnTheOverlay(songInfo.durationSeconds)}`);
+	const duration = ConvertSecondsToMinutesSoThatItLooksBetterOnTheOverlay(songInfo.durationSeconds);
+	console.debug(`Progress: ${ConvertSecondsToMinutesSoThatItLooksBetterOnTheOverlay(state.player.videoProgress)}`);
+	console.debug(`Duration: ${ConvertSecondsToMinutesSoThatItLooksBetterOnTheOverlay(songInfo.durationSeconds)}`);
 	document.getElementById("progressBar").style.width = `${progress}%`;
 	document.getElementById("progressTime").innerHTML = progressTime;
 	document.getElementById("duration").innerHTML = `-${duration}`;
@@ -147,16 +151,12 @@ function SetVisibility(isVisible) {
 	const mainContainer = document.getElementById("mainContainer");
 
 	if (isVisible) {
-		var tl = new TimelineMax();
-		tl
-			.to(mainContainer, animationSpeed, { bottom: "50%", ease: Power1.easeInOut }, 'label')
-			.to(mainContainer, animationSpeed, { opacity: 1, ease: Power1.easeInOut }, 'label')
+		mainContainer.style.opacity = 1;
+		mainContainer.style.bottom = "50%";
 	}
 	else {
-		var tl = new TimelineMax();
-		tl
-			.to(mainContainer, animationSpeed, { bottom: "45%", ease: Power1.easeInOut }, 'label')
-			.to(mainContainer, animationSpeed, { opacity: 0, ease: Power1.easeInOut }, 'label')
+		mainContainer.style.opacity = 0;
+		mainContainer.style.bottom = "calc(50% - 20px)";
 	}
 }
 
@@ -172,19 +172,23 @@ function SetConnectionStatus(connected) {
 	if (connected) {
 		statusContainer.style.background = "#2FB774";
 		statusContainer.innerText = "Connected!";
-		var tl = new TimelineMax();
-		tl
-			.to(statusContainer, 0, { opacity: 1, ease: Linear.easeNone })
-			.to(statusContainer, 2, { opacity: 0, ease: Linear.easeNone });
+		statusContainer.style.opacity = 1;
+		setTimeout(() => {
+			statusContainer.style.transition = "all 2s ease";
+			statusContainer.style.opacity = 0;
+		}, 10);
+
 		console.log("Connected!");
 	}
 	else {
 		// statusContainer.style.background = "#D12025";
 		// statusContainer.innerText = "Connecting...";
-		// var tl = new TimelineMax();
-		// tl
-		// 	.to(statusContainer, 0, { opacity: 1, ease: Linear.easeNone })
-		// 	.to(statusContainer, 2, { opacity: 0, ease: Linear.easeNone });
+		// statusContainer.style.opacity = 1;
+		// setTimeout(() => {
+		// 	statusContainer.style.transition = "all 2s ease";
+		// 	statusContainer.style.opacity = 0;
+		// }, 10);
+		SetVisibility(false);
 		console.log("Not connected...");
 	}
 }
@@ -214,14 +218,12 @@ function resize() {
 //   HIDE THE ALBUM ART, BECAUSE THAT'S WHAT IT'S SUPPOSED TO DO   //
 /////////////////////////////////////////////////////////////////////
 
-if (hideAlbumArt)
-{
+if (hideAlbumArt) {
 	document.getElementById("albumArtBox").style.display = "none";
 	document.getElementById("songInfoBox").style.width = "calc(100% - 20px)";
 }
 
-if (token == "")
-{
+if (token == "") {
 	console.log("No token detected...");
 	window.open(`${baseURL}/configure`);
 }

@@ -3,13 +3,13 @@
 	--album-art-size: 100px;
 }
 
+body {
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
 #statusContainer {
-	font-family: 'Metropolis';
-	font-style: italic;
-	font-weight: bold;
+	font-weight: 500;
 	font-size: 30px;
-	width: 400px;
-	max-width: fit-content;
 	text-align: center;
 	background-color: #D12025;
 	color: white;
@@ -28,12 +28,13 @@
 	position: absolute;
 	height: var(--album-art-size);
 	margin: 20px;
-	filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 1));
+	filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.5));
 	width: 100%;
 	max-width: 500px;
-	bottom: 45%;
+	bottom: calc(50% - 20px);
 	left: 50%;
 	opacity: 0;
+	transition: all 0.5s ease;
 }
 
 #albumArtBox {
@@ -62,7 +63,7 @@
 	flex: 0 1 auto;
 	justify-content: center;
 	z-index: 1;
-	text-shadow: 2px 2px 2px black;
+	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 	overflow: hidden;
 	z-index: 4;
 }
@@ -122,8 +123,7 @@
 
 #songLabel {
 	font-size: 16px;
-	font-weight: 100;
-	font-style: italic;
+	font-weight: 400;
 	line-height: 0.8;
 	white-space: nowrap;
 }
@@ -142,6 +142,7 @@
 	width: 20%;
 	background-color: #ffffff;
 	margin: 10px 0px;
+	transition: all 1s ease;
 }
 
 #times {
