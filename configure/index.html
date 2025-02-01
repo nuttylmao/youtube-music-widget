@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <head>
+	<title>Configure</title>
 	<meta charset="UTF-8">
 	<link rel="shortcut icon" href="#" />
 	<link rel="stylesheet" href="./style.css" />
@@ -9,20 +10,25 @@
 <body>
 	<div id="mainContainer">
 		<div id="connectBox">
-			Click here to connect:
-			<button onclick="RequestToken()">Connect</button>
+			<label style="text-align: center;">
+				Click here to connect
+				<br><br>
+				<button class="button" onclick="RequestToken()">CONNECT</button>
+			</label>
 		</div>
 		<div id="authorizationBox">
-			<span id="authorizationCode"></span>
-			<br>
-			<button id="copyURLButton" onclick="CopyToURL()" disabled="true">Click here to copy URL</button>
+			<label id="authorizationCode">
+				2305
+			</label>
+			<button class="button" id="copyURLButton" onclick="CopyToURL()" disabled="true">Awaiting approval</button>
 		</div>
 		<div id="errorBox">
-			Error Code: 
-			<span id="errorCode"></span>
+			<label style="font-size: 30px; font-weight: 600;">Error <span id="errorCode">69</span></label>
 			<br>
-			Message: 
-			<span id="errorMessage"></span>
+			<span id="errorMessage">You died lmao. You died lmao. You died lmao. You died lmao. You died lmao. You died lmao.You died lmao. You died lmao.</span>
+			<br><br>
+			
+			<button class="button" id="closeErrorBox" onclick="CloseErrorBox()">Okay</button>
 		</div>
 	</div>
 </body>

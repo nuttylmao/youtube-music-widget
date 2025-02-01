@@ -7,7 +7,7 @@ body {
 	margin: 0px;
 	color: white;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-	font-size: 20px;
+	font-size: 24px;
 }
 
 #mainContainer {
@@ -19,40 +19,82 @@ body {
 }
 
 #errorBox {
-	background-color: #181818;
-	border-style: solid;
-	border-color: white;
-	border-width: 1px;
+	background-color: #6d0b0b;
 	border-radius: var(--corner-radius);
-	padding: var(--padding);
-	/* position: absolute;
+	padding: calc(var(--padding)) calc(var(--padding)*2);
+	position: absolute;
 	left: 50%;
 	top: 50%;	
-	transform: translateX(-50%) translateY(-50%); */
+	transform: translateX(-50%) translateY(-50%);
+	filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 1));
+	display: none;
 }
 
 #connectBox{
 	background-color: #181818;
-	border-style: solid;
-	border-color: white;
-	border-width: 1px;
 	border-radius: var(--corner-radius);
-	padding: var(--padding);
-	/* position: absolute;
+	padding: calc(var(--padding)*3) calc(var(--padding)*5);
+	position: absolute;
 	left: 50%;
 	top: 50%;	
-	transform: translateX(-50%) translateY(-50%); */
+	transform: translateX(-50%) translateY(-50%);
+	display: flex;
+	filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 1));
 }
 
 #authorizationBox {
-	background-color: #181818;
-	border-style: solid;
-	border-color: white;
-	border-width: 1px;
+	background-color: #252525;
 	border-radius: var(--corner-radius);
-	padding: var(--padding);
-	/* position: absolute;
+	padding: calc(var(--padding)*3) calc(var(--padding)*6) ;
+	position: absolute;
 	left: 50%;
 	top: 50%;	
-	transform: translateX(-50%) translateY(-50%); */
+	transform: translateX(-50%) translateY(-50%);
+	filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 1));
+	display: none;
+}
+
+#authorizationCode {
+	display: block;
+	text-align: center;
+	font-size: 80px;
+	font-weight: 700;
+	padding-left: 30px;
+	padding-bottom: 40px;
+	letter-spacing: 30px;
+	color: #f44336;
+}
+
+.button {
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+	font-size: 24px;
+	font-weight: 500;
+	background-color: #f44336;
+	color: white;
+	opacity: 0.8;
+	border-width: 0;
+	border-radius: var(--corner-radius);
+	padding: calc(var(--padding)/2) var(--padding);
+}
+
+.button:hover {
+	opacity: 1;
+	cursor: pointer;
+}
+
+#copyURLButton {
+	background-color: #ffffff;
+	color: #181818;
+	width: 100%;
+}
+
+#copyURLButton:disabled {
+	background-color: #636363;
+	opacity: 0.8;
+	cursor: inherit;
+}
+
+#closeErrorBox {
+	background-color: #ffffff;
+	color: #181818;
 }

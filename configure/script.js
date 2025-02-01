@@ -23,8 +23,9 @@ async function RequestCode() {
 	console.debug(responseData);
 	if (responseData.hasOwnProperty("statusCode"))
 	{
-		document.getElementById("errorCode").innerHTML = responseData.statusCode;
-		document.getElementById("errorMessage").innerHTML = responseData.message;
+		document.getElementById("errorCode").innerText = responseData.statusCode;
+		document.getElementById("errorMessage").innerText = responseData.message;
+		document.getElementById("errorBox").style.display = 'inline';
 	}
 	else
 		return await responseData;
@@ -35,7 +36,10 @@ async function RequestToken() {
 	const requestCode = await RequestCode();
 	const authCode = requestCode.code;
 	console.debug(`Auth Code: ${authCode}`);
-	document.getElementById("authorizationCode").innerHTML = authCode;
+	document.getElementById("authorizationCode").innerText = authCode;
+
+	// Show the authorize popup
+	document.getElementById("authorizationBox").style.display = 'inline';
 
 	const response = await fetch("http://localhost:9863/api/v1/auth/request", {
 		method: "POST",
@@ -51,22 +55,42 @@ async function RequestToken() {
 	const responseData = await response.json();
 	if (responseData.hasOwnProperty("statusCode"))
 	{
-		document.getElementById("errorCode").innerHTML = responseData.statusCode;
-		document.getElementById("errorMessage").innerHTML = responseData.message;
+		document.getElementById("errorCode").innerText = responseData.statusCode;
+		document.getElementById("errorMessage").innerText = responseData.message;
+		document.getElementById("errorBox").style.display = 'inline';
+		
+		// Hide the authorize popup
+		document.getElementById("authorizationBox").style.display = 'none';
 	}
+	else
+	{
+		const token = responseData.token;
+		console.debug(`Token: ${token}`);
+		browserSourceURL = `${baseURL}?token=${token}`;
 
-	const token = responseData.token;
-	console.debug(`Token: ${token}`);
-	//browserSourceURL = `${baseURL}?token=${token}`;
-	
-	browserSourceURL = window.location.href;
-	console.log(browserSourceURL);
-	document.getElementById("copyURLButton").disabled = false;
+		// Enable the Copy URL Button
+		document.getElementById("copyURLButton").disabled = false;
+		document.getElementById("copyURLButton").innerText = "Click to copy URL";
+	}
 
 	return await responseData; 
 }
 
 function CopyToURL() {
-	//navigator.clipboard.writeText(browserSourceURL);
-	console.log(`Browser URL ${browserSourceURL}`);
+	navigator.clipboard.writeText(browserSourceURL);
+
+	
+	document.getElementById("copyURLButton").innerText = "Copied to clipboard";
+	document.getElementById("copyURLButton").style.backgroundColor = "#00dd63"
+	document.getElementById("copyURLButton").style.color = "#ffffff"
+
+	setTimeout(() => {
+		document.getElementById("copyURLButton").innerText = "Click To copy URL";
+		document.getElementById("copyURLButton").style.backgroundColor = "#ffffff"
+		document.getElementById("copyURLButton").style.color = "#181818"
+	}, 3000);
+}
+
+function CloseErrorBox() {
+	document.getElementById("errorBox").style.display = 'none';
 }
