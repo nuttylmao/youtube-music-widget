@@ -43,15 +43,14 @@ body {
 	border-radius: var(--corner-radius);
 	overflow: hidden;
 	margin: 0px 8px 0px 0px;
-}
-
-#albumArt {
-	position: absolute;
+	object-fit: cover;
 	width: var(--album-art-size);
 }
 
-#albumArtBack {
-	width: var(--album-art-size);
+#albumArtBox img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 #songInfoBox {

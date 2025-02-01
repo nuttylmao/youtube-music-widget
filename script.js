@@ -105,9 +105,9 @@ function UpdatePlayer(state) {
 	const songInfo = state.video;
 	const progress = ((state.player.videoProgress / songInfo.durationSeconds) * 100);
 	const progressTime = ConvertSecondsToMinutesSoThatItLooksBetterOnTheOverlay(state.player.videoProgress);
-	const duration = ConvertSecondsToMinutesSoThatItLooksBetterOnTheOverlay(songInfo.durationSeconds);
-	console.debug(`Progress: ${ConvertSecondsToMinutesSoThatItLooksBetterOnTheOverlay(state.player.videoProgress)}`);
-	console.debug(`Duration: ${ConvertSecondsToMinutesSoThatItLooksBetterOnTheOverlay(songInfo.durationSeconds)}`);
+	const duration = ConvertSecondsToMinutesSoThatItLooksBetterOnTheOverlay(songInfo.durationSeconds - state.player.videoProgress);
+	console.debug(`Progress: ${progressTime}`);
+	console.debug(`Duration: ${duration}`);
 	document.getElementById("progressBar").style.width = `${progress}%`;
 	document.getElementById("progressTime").innerHTML = progressTime;
 	document.getElementById("duration").innerHTML = `-${duration}`;
