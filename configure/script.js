@@ -71,6 +71,13 @@ async function RequestToken() {
 		// Enable the Copy URL Button
 		document.getElementById("copyURLButton").disabled = false;
 		document.getElementById("copyURLButton").innerText = "Click to copy URL";
+
+		// Show the donation button
+		document.getElementById("authorizationCode").style.display = 'none';
+
+		// Show the donation button and confirmation text
+		document.getElementById("donateButton").style.display = 'block';
+		document.getElementById("authorizationComplete").style.display = 'block';
 	}
 
 	return await responseData; 
@@ -78,17 +85,24 @@ async function RequestToken() {
 
 function CopyToURL() {
 	navigator.clipboard.writeText(browserSourceURL);
-
 	
 	document.getElementById("copyURLButton").innerText = "Copied to clipboard";
 	document.getElementById("copyURLButton").style.backgroundColor = "#00dd63"
-	document.getElementById("copyURLButton").style.color = "#ffffff"
+	document.getElementById("copyURLButton").style.color = "#ffffff";
 
 	setTimeout(() => {
-		document.getElementById("copyURLButton").innerText = "Click To copy URL";
-		document.getElementById("copyURLButton").style.backgroundColor = "#ffffff"
-		document.getElementById("copyURLButton").style.color = "#181818"
+		document.getElementById("copyURLButton").innerText = "Click to copy URL";
+		document.getElementById("copyURLButton").style.backgroundColor = "#ffffff";
+		document.getElementById("copyURLButton").style.color = "#181818";
 	}, 3000);
+}
+
+function OpenInstructions() {
+    window.open("https://nuttylmao.notion.site/Spotify-Widget-18e19969b237807ca88cfc9c4159da15", '_blank').focus();
+}
+
+function OpenDonationPage() {
+    window.open("http://nutty.gg/pages/donate", '_blank').focus();
 }
 
 function CloseErrorBox() {

@@ -1,12 +1,12 @@
 * {
 	--corner-radius: 10px;
 	--padding: 20px;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
 	margin: 0px;
 	color: white;
-	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 	font-size: 24px;
 }
 
@@ -33,24 +33,26 @@ body {
 #connectBox{
 	background-color: #181818;
 	border-radius: var(--corner-radius);
-	padding: calc(var(--padding)*3) calc(var(--padding)*5);
+	padding: calc(var(--padding)*3) calc(var(--padding)*3);
 	position: absolute;
 	left: 50%;
 	top: 50%;	
 	transform: translateX(-50%) translateY(-50%);
-	display: flex;
 	filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 1));
+	width: 400px;
+	text-align: center;
 }
 
 #authorizationBox {
 	background-color: #252525;
 	border-radius: var(--corner-radius);
-	padding: calc(var(--padding)*3) calc(var(--padding)*6) ;
+	padding: calc(var(--padding)*3) calc(var(--padding)*3);
 	position: absolute;
 	left: 50%;
 	top: 50%;	
 	transform: translateX(-50%) translateY(-50%);
 	filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 1));
+	width: 400px;
 	display: none;
 }
 
@@ -65,7 +67,14 @@ body {
 	color: #f44336;
 }
 
-.button {
+#authorizationComplete {
+	display: block;
+	text-align: center;
+	padding-bottom: 40px;
+	display: none;
+}
+
+button {
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 	font-size: 24px;
 	font-weight: 500;
@@ -75,17 +84,23 @@ body {
 	border-width: 0;
 	border-radius: var(--corner-radius);
 	padding: calc(var(--padding)/2) var(--padding);
+	width: 100%;
 }
 
-.button:hover {
+button:hover {
 	opacity: 1;
 	cursor: pointer;
+}
+
+#instructionsButton, #donateButton {
+	background-color: #2e2e2e;	
 }
 
 #copyURLButton {
 	background-color: #ffffff;
 	color: #181818;
 	width: 100%;
+	transition: all 0.2s ease;
 }
 
 #copyURLButton:disabled {
