@@ -98,7 +98,7 @@ function CopyToURL() {
 }
 
 function OpenInstructions() {
-    window.open("https://nuttylmao.notion.site/Spotify-Widget-18e19969b237807ca88cfc9c4159da15", '_blank').focus();
+    window.open("https://www.notion.so/nuttylmao/YouTube-Music-Widget-18d19969b23780e2bb56d25eed4d154e", '_blank').focus();
 }
 
 function OpenDonationPage() {
