@@ -28,7 +28,7 @@ body {
 	position: absolute;
 	height: var(--album-art-size);
 	margin: 20px;
-	filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.5));
+	filter: drop-shadow(15px 15px 7px rgba(0, 0, 0, 1));
 	width: 100%;
 	max-width: 500px;
 	bottom: calc(50% - 20px);
@@ -69,6 +69,7 @@ body {
 
 #songInfo {
 	background: rgba(0, 0, 0, 0.5);
+	opacity: 0.9;
 	position: relative;
 	border-radius: var(--corner-radius);
 	padding: 0px 20px;
@@ -115,15 +116,18 @@ body {
 }
 
 #artistLabel {
-	font-weight: bold;
-	font-size: 24px;
-	white-space: nowrap;
-}
-
-#songLabel {
 	font-size: 16px;
 	font-weight: 400;
-	line-height: 0.8;
+	line-height: 1;
+	white-space: nowrap;
+}  
+
+#songLabel {
+	font-weight: bold;
+	font-size: 20px;	
+	width: calc(100%);
+	overflow: hidden;
+	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
